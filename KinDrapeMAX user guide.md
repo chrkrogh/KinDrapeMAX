@@ -1,3 +1,4 @@
+'''
    _   ___      ______                     ___  ___  ___  __   __
   | | / (_)     |  _  \                    |  \/  | / _ \ \ \ / /
   | |/ / _ _ __ | | | |_ __ __ _ _ __   ___| .  . |/ /_\ \ \ V / 
@@ -5,13 +6,13 @@
   | |\  \ | | | | |/ /| | | (_| | |_) |  __/ |  | || | | |/ /^\ \
   \_| \_/_|_| |_|___/ |_|  \__,_| .__/ \___\_|  |_/\_| |_/\/   \/
                                 | |                              
-                                |_|  
+			       |_|  
 
-|=================================================================|
-|=========================== User guide ==========================|
-|=================================================================|
+'''
 
-|=== Introduction ===|
+# User guide
+
+## Introduction
 The program can analyze and optimize the draping pattern on a mold using a kinematic draping model and the built-in MATLAB implementation of genetic algorithm, i.e. the function ga. It is intended for wind turbine blade production, i.e. where multiple roll-widths or courses of fabric are necessary to cover the mold and where the mold is more or less rectangular. It can, however, also analyze a single ply on any smooth surface. 
 
 The program was used for generating the results of the journal paper:
@@ -28,7 +29,7 @@ The (close to) rectangular molds used for wind turbine blade production have the
 
 N.B. the terms lengthwise/longitudinal and widthwise/transverse will be used interchangeably.
 
-|=== Main input/output ===|
+## Main input/output
 Different structs are used to store input and output to the program:
 - Inp: input (including the contents from the input file)
 - Set: program settings
@@ -46,7 +47,7 @@ The mold data is stored in different cell arrays (one cell for each layer, i.e. 
 
 The latter two are used for the geodesic curve algorithm. 
 
-|=== The draping algorithm ===|
+## The draping algorithm 
 As an introduction to the basic draping algorithm, please see the following educational arcticle:
 
 Krogh, C., Bak, B.L.V., Lindgaard, E. et al. A simple MATLAB draping code for fiber-reinforced composites with application to optimization of manufacturing process parameters. Struct Multidisc Optim 64, 457–471 (2021). https://doi.org/10.1007/s00158-021-02925-z. Free read-only access: https://rdcu.be/c22yN
@@ -59,27 +60,27 @@ Furthermore, steering curves can be defined in absolute coordinates on the mold 
 
 When draping a layer, the first course can be draped as described above for a single course, and the remaining courses are draped relative to the previous course. That is, steering points defined for courses #2 to #Ncourses are relative to the edge of the previous course. When draping a stack, each new layer is draped on an offset mold surface.
 
-|=== Optimization ===|
+## Optimization
 The optimizer can manipulate the course placement (offsets from net boundary line or other courses), the shear distribution (longituidnal/lengthwise origin node index, i.e. with the lengthwise steering curve) and width, while minimizing criteria such as shear angles, deviations of the UD fiber angles from a nominal value and the trim area/material waste. 
 
-|=== Settings in the main script ===|
+## Settings in the main script
 This is an overview of the settings and tweaks in the main script. First general settings:
 - rng(<arg>): seed for the random number generator used for the genetic algorithm (<arg> must be an integer).
 - Inp.MoldName: the mold used for draping (string). It must be a MATLAB function located in a subfolder in the "Molds"-folder. Both function and subfolder must have the same name. See the guide in the "Molds"-folder.
 - Inp.FileName: [optional] input file name (string). Must correspond to a MATLAB script in a subfolder in the "Input files"-folder. Both script and subfolder must have the same name analogous to the mold system. If Inp.FileName is not provided or it is empty, the program displays the available input files in the command window and the user can choose one.
 - Set.Mode: choose how the program runs. The options are (string):
-	--> 'analysis': run the input file for analysis (i.e. without optimization)
-	--> 'baseline': run the input file for analysis but through the framework of the optimization (to check) 
-	--> 'opt': run the input file for optimization (all layers at the same time, "all-layer" formulation)
-	--> 'opt-seq': run the input file for optimization (one layer at the time, "sequential" formulation)
-	--> 'storedopt': run an input file with a stored vector of design variables (stored by the program)
-	--> 'error': run a vector of design variables that was stored during a program error to reproduce it. This storing is active if the variable Set.OptDebug is set to true.
+	- 'analysis': run the input file for analysis (i.e. without optimization)
+	- 'baseline': run the input file for analysis but through the framework of the optimization (to check) 
+	- 'opt': run the input file for optimization (all layers at the same time, "all-layer" formulation)
+	- 'opt-seq': run the input file for optimization (one layer at the time, "sequential" formulation)
+	- 'storedopt': run an input file with a stored vector of design variables (stored by the program)
+	- 'error': run a vector of design variables that was stored during a program error to reproduce it. This storing is active if the variable Set.OptDebug is set to true.
 - Set.InpFileType: filter for selecting input file type. The options are (string):
-	--> 'course': C_*
-	--> 'layer' : L_*
-	--> 'stack' : S_*
-	--> 'layer-optimization': LO_*
-	--> 'stack-optimization': SO_*
+	- 'course': C_*
+	- 'layer' : L_*
+	- 'stack' : S_*
+	- 'layer-optimization': LO_*
+	- 'stack-optimization': SO_*
 
 This naming convention must be followed by the input files. I.e. an input file for a single course must start with "C_". The reason why different input file types are defined is to make appropriate checks on data types and values when loading the input file. A single course only needs little information in comparison to a stack for optimization and it is thus a way of making a simpler input file that can still be checked. Notice though that e.g. a stack-optimization input file also can be used to analyze a single course but it must contain all the required information about the entire stack as well as the optimization settings.
 
@@ -111,7 +112,7 @@ Plot settings:
 - Plt.FigWindowSize: specify the figure window size (string with options: 'normal' for MATLAB standard, 'full' for full-screen, 'half' for approximately left half or 'full-other' for full screen on another monitor (define this by first running the aux. script "DefineOtherScreen.m".
 - Plt.Display: display output in figures (true/false).
 
-|=== Input files ===|
+## Input files
 While reading the following description of the different input files it is recommended to simultaneously go through the example input files in the "Input files"-folder.
 
 For a single course the following variables must be defined in the input file (filename beginning with "C_"):

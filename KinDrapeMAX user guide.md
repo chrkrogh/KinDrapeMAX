@@ -1,4 +1,4 @@
-´´´
+```
    _   ___      ______                     ___  ___  ___  __   __
   | | / (_)     |  _  \                    |  \/  | / _ \ \ \ / /
   | |/ / _ _ __ | | | |_ __ __ _ _ __   ___| .  . |/ /_\ \ \ V / 
@@ -8,7 +8,7 @@
                                 | |                              
 			       |_|  
 
-´´´
+```
 
 # User guide
 
@@ -115,6 +115,7 @@ Plot settings:
 ## Input files
 While reading the following description of the different input files it is recommended to simultaneously go through the example input files in the "Input files"-folder.
 
+### Course input files
 For a single course the following variables must be defined in the input file (filename beginning with "C_"):
 - d: discretization (scalar > 0)
 - Grid: size of the draping grid ([nWidthNodes nLengthNodes] with each entry being an integer > 0)
@@ -126,6 +127,7 @@ For a single course the following variables must be defined in the input file (f
 - SteerPtsRef: reference for the steering points (cell array. Options for 1st cell (lengthwise): 'Right', 'Left' or 'Abs'. Options for 2nd cell (widthwise): 'Bottom' or 'Abs'. Here 'Abs' means that the steering points are in absolute mold coordinates, i.e. not relative to an edge). The variable is only active if 'Steer' is chosen for any of the DraContr cells but it must always be defined.
 - SteerPts: definition of steering points (2 x 1 cell array where the first cell pertains to the lengthwise generator and the second cell pertains to the widthwise generator. Each cell is a numeric array with two rows where the first is the x-coordinates and the second is the y-coordinates of the steering points. There can be as many columns, i.e. steering points as needed. If e.g. relative steering points are used, a single point can be used to specify a constant offset).
 
+### Layer input files
 For a layer input file (filename beginning with "L_"), some additional variables must be specified:
 - nCourses: number of courses defined in the layer input file (integer > 0)
 - nCoursesUse [optional]: the number of courses of the ones defined to use (integer > 0 and <= nCourses)
@@ -136,6 +138,7 @@ The variable Ang is not active and therefore not necessary to define for layers 
 The variables DraContr and SteerPtsRef are unchanged because these settings apply to all courses in a layer.
 The variable SteerPts must now be a 2 x nCourses cell array where the 1st row is still pertaining to the lengthwise steering points and the 2nd row pertaining to the widthwise steering points. Each column now pertains to a course in the layer.
 
+### Stack input files
 For a stack input file (filename beginning with "S_"), some additional variables must be specified:
 - nLayers: number of layers defined in the input file (integer > 0).
 - nLayersUse [optional]: the number of layers of the ones defined to use (integer > 0 and <= nLayers)
@@ -144,6 +147,7 @@ Further, the cell arrays of the variables d, Grid, Org, OrgNode/OrgNodePct and P
 The variables DraContr and SteerPtsRef are unchanged because these settings apply to all courses in a stack.
 The variable SteerPts must now be a cell array of 1 x nLayers where each cell is a sub cell array of 2 x nCourses as described for a single layer.
 
+### Layer or stack optimization input files
 For an optimization input file for a layer or a stack (filename beginning with "LO_" or "SO_") the paramterization, criteria and optimization settings must be specified in additional variables. The settings relating to design variables are stored in the struct DesVar:
 - DesVar.OrgNodeLong: toggle the longitudinal/lengthwise origin node index of each course as a design variable (true/false).
 - DesVar.TransOffset: toggle the transverse/widthwise offset between adjacent courses as design variable. Here, the optimizer will manipulate the x-coordinates of the already defined steering points for courses #2-#Ncourses in each layer (true/false: all steering points or vector of integers specifying the indices of the steering points to be manipulated. N.B: The number of defined steering points for courses #2-#Ncourses must be the same.)
@@ -170,6 +174,7 @@ The settings relating to bounds on design variables and constraints are stored i
 - BndAndCon.FirstTransOffset: lower and upper bound on the FirstTransOffset design variable (2-component vector where 1st entry must be smaller than the 2nd).
 
 And lastly the genetic algorithm settings in the variable GASet which must call the MATLAB "optimoptions" function to set the values, i.e. (please see the MATLAB Global Optimization Toolbox documentation):
+```
 GASet = optimoptions('ga',...
     	'Display','iter',...
     	'MaxGenerations',<maximum number of generations (integer > 0)>,... 
@@ -182,5 +187,5 @@ GASet = optimoptions('ga',...
     	'PlotFcn',{@gaplotbestf,@gaplotstopping},...
 	'NonlinearConstraintAlgorithm','penalty'...
     );
-
+```
 N.B: The MaxGenerations, MaxStallGenerations, PopulationSize and EliteCount are applied per layer in use

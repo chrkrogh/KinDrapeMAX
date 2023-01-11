@@ -1,4 +1,4 @@
-'''
+´´´
    _   ___      ______                     ___  ___  ___  __   __
   | | / (_)     |  _  \                    |  \/  | / _ \ \ \ / /
   | |/ / _ _ __ | | | |_ __ __ _ _ __   ___| .  . |/ /_\ \ \ V / 
@@ -8,7 +8,7 @@
                                 | |                              
 			       |_|  
 
-'''
+´´´
 
 # User guide
 
@@ -65,7 +65,7 @@ The optimizer can manipulate the course placement (offsets from net boundary lin
 
 ## Settings in the main script
 This is an overview of the settings and tweaks in the main script. First general settings:
-- rng(<arg>): seed for the random number generator used for the genetic algorithm (<arg> must be an integer).
+- rng(\<arg\>): seed for the random number generator used for the genetic algorithm (\<arg\> must be an integer).
 - Inp.MoldName: the mold used for draping (string). It must be a MATLAB function located in a subfolder in the "Molds"-folder. Both function and subfolder must have the same name. See the guide in the "Molds"-folder.
 - Inp.FileName: [optional] input file name (string). Must correspond to a MATLAB script in a subfolder in the "Input files"-folder. Both script and subfolder must have the same name analogous to the mold system. If Inp.FileName is not provided or it is empty, the program displays the available input files in the command window and the user can choose one.
 - Set.Mode: choose how the program runs. The options are (string):

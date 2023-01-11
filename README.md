@@ -16,4 +16,3 @@ The program was used to generate the results described in the journal paper:
 [inser reference when published]
 
 Below is an example of output generated with the program: five courses of fabric draped in a mold and colored based on shear angle.
-![This is an image](/Output/2022-December-19_14-52_1layer_baseline/ShearFig.png)

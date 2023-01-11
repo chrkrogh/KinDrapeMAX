@@ -10,7 +10,7 @@ genetic algorithm, i.e. the function ga. It is intended for wind turbine
 blade production, i.e. where multiple roll-widths or courses of fabric 
 are necessary to cover the mold and where the mold is more or less 
 rectangular. It can, however, also analyze a single ply on any smooth 
-surface. Please see the [user guide](/KinDrapeMAX user guide.md) for more information on how to run it.
+surface. Please see the [user guide](/KinDrapeMAX_user_guide.md) for more information on how to run it.
 
 The program was used to generate the results described in the journal paper:
 [inser reference when published]

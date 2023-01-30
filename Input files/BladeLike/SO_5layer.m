@@ -22,7 +22,7 @@ Org(5,:) = {[inf 0],[inf 0],[inf 0],[inf 0],[inf 0]};
 
 OrgNodePct = repmat({[100 0]},5,5);
 % Set the origin nodes of the 1st course in each layer to [0 0]
-OrgNodePct(:,1) = repmat({[0 0]},5,1)
+OrgNodePct(:,1) = repmat({[0 0]},5,1);
 
 PreShear = repmat({0.0},5,5);
 

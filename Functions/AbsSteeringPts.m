@@ -137,24 +137,26 @@ if strcmpi(DraContr{1},'Steer')
     % combination with a transverse geodesic line
     if strcmpi(DraContr{2},'Geo')
         
-        %%%% TEST %%%
-%         % Auto-move origin so that the course starts at TargetY
-%         % Get z coordinate of AbsSteerPts
-%         AbsSteerPtsZ = F(SteerPtsAbs{1}(1,:),SteerPtsAbs{1}(2,:));
-%         % Calculate cumulative distance
-%         CumDist = [0 cumsum(sqrt(diff(SteerPtsAbs{1}(1,:)).^2 + ...
-%             diff(SteerPtsAbs{1}(2,:)).^2 + diff(AbsSteerPtsZ).^2))] + ...
-%             SteerPtsAbs{1}(2,1);
-%         % Find the two points clostst to the target y
-%         [~,idx] = mink(abs(CumDist-TargetY),2);
-%         Idx1 = min(idx);
-%         Idx2 = max(idx);
-%         Frac2 = (TargetY-CumDist(Idx1))/(CumDist(Idx2)-CumDist(Idx1));
-% 
-%         Org(2) = Frac2*SteerPtsAbs{1}(2,max(idx)) + ...
-%             (1-Frac2)*SteerPtsAbs{1}(2,min(idx));
+        % Calculate the course offsetting from the bottom, i.e. root
+        % Only for Set.Mode = 'analysis' because it is handled differently
+        % with optimization (see the function LayerObj).
+        if ~isempty(TargetY)
+            % Auto-move origin so that the course starts at TargetY
+            % Get z coordinate of AbsSteerPts
+            AbsSteerPtsZ = F(SteerPtsAbs{1}(1,:),SteerPtsAbs{1}(2,:));
+            % Calculate cumulative distance
+            CumDist = [0 cumsum(sqrt(diff(SteerPtsAbs{1}(1,:)).^2 + ...
+                diff(SteerPtsAbs{1}(2,:)).^2 + diff(AbsSteerPtsZ).^2))] + ...
+                SteerPtsAbs{1}(2,1);
+            % Find the two points clostst to the target y
+            [~,idx] = mink(abs(CumDist-TargetY),2);
+            Idx1 = min(idx);
+            Idx2 = max(idx);
+            Frac2 = (TargetY-CumDist(Idx1))/(CumDist(Idx2)-CumDist(Idx1));
 
-        %%%%%%%%%%%%
+            Org(2) = Frac2*SteerPtsAbs{1}(2,max(idx)) + ...
+                (1-Frac2)*SteerPtsAbs{1}(2,min(idx));
+        end
 
         % Use the y-coordinate (2nd component) of Org as the target
         OrgAdj = AdjOrgSteerPts(SteerPtsAbs,Org);

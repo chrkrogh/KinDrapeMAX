@@ -1,5 +1,5 @@
 function Dra = Step1(d,Grid,Ang,Org,OrgNode,PreShear,F,DT,z,DraContr,...
-    SteerPts,SteerPtsRef,Mold,Plt,Set)
+    SteerPts,SteerPtsRef,Mold,Plt,Set,RootCourseOffset)
 % Step 1: Generators (geodesic from unfolded tri or steering curve)
 
 % Define propagation directions in the Node array
@@ -9,7 +9,12 @@ Dir2 = [0 -1 0 1; 1 0 -1 0]';
 % Initialize Node
 Node = NaN([Grid 3]);
 
-TargetY = (OrgNode(2)-1) * d;% + BottomCourseOffset;
+% Enable to use course offsetting from the bottom, i.e. root
+if strcmpi(Set.Mode,'analysis')
+    TargetY = (OrgNode(2)-1) * d + RootCourseOffset;
+else
+    TargetY = [];
+end
 
 % Convert the steering points to absolute values
 [SteerPtsAbs,OrgAdj] = AbsSteeringPts(SteerPts,DraContr,SteerPtsRef,...

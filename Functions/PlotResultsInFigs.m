@@ -65,7 +65,7 @@ if ~strcmpi(Set.InpFileType,'course')
         end
     end
     % Plot 2D flattened stack (here for right-to-left draping order)
-    Plt.StackFig = Plot2DFlattenedStack(Inp,Mold,OptRes_S);
+    Plt.StackFig = Plot2DFlattenedStack(Inp,Mold,Set,OptRes_S);
 end
 
 end

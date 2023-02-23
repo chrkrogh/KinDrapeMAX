@@ -31,6 +31,7 @@ end
 
 if strcmpi(Type,'course')
     Size = [];
+    RootCourseOffset = [];
 end
 
 if strcmpi(Type,'layer')
@@ -342,6 +343,17 @@ if strcmpi(Mode,'Parse') || strcmpi(Mode,'ReadDispParse')
         end
     end
 
+    % Root course offset from bottom (hidden/undocumented)
+    if ~exist('RootCourseOffset','var')
+        if strcmpi(Type,'course')
+            RootCourseOffset = [];
+        elseif strcmpi(Type,'layer')
+            RootCourseOffset = cell(1,nCourses);
+        elseif strcmpi(Type,'stack')
+            RootCourseOffset = cell(nLayers,max(nCourses));
+        end
+    end
+
     if OptimizationFlag
         % Check that the optimization settings are included correctly
         % DesVar struct
@@ -558,6 +570,7 @@ if strcmpi(Mode,'Parse') || strcmpi(Mode,'ReadDispParse')
     if strcmpi(Type,'course')
         Inp.Size = Size;
         Inp.Ang = Ang;
+        Inp.RootCourseOffset = RootCourseOffset;
     end
     if strcmpi(Type,'course') || strcmpi(Type,'layer')
         Inp.d = d;
@@ -583,6 +596,7 @@ if strcmpi(Mode,'Parse') || strcmpi(Mode,'ReadDispParse')
         Inp.DraContr_L = DraContr;
         Inp.SteerPts_L = SteerPts;
         Inp.SteerPtsRef_L = SteerPtsRef;
+        Inp.RootCourseOffset_L = RootCourseOffset;
     elseif strcmpi(Type,'stack')
         for k = 1:nLayers
             if k == 1
@@ -601,6 +615,7 @@ if strcmpi(Mode,'Parse') || strcmpi(Mode,'ReadDispParse')
             Inp(k).DraContr_L = DraContr;
             Inp(k).SteerPts_L = SteerPts{k};
             Inp(k).SteerPtsRef_L = SteerPtsRef;
+            Inp(k).RootCourseOffset_L = RootCourseOffset(k,:);
         end
     end
 

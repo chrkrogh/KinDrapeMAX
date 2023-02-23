@@ -14,7 +14,9 @@ if isfield(Inp,'MoldName') && ~isempty(Inp.MoldName)
         FilePath = ['./Molds/' Folder '/'];
     else
         % For remaining layers stay on same path (for later cd)
-        FilePath = './';
+        % Trick for subfolder molds (return path after first /)
+        [~,RemaingPath] = strtok(Folder,'/');
+        FilePath = ['.' RemaingPath '/'];
     end
 
     % Remove first part of path (if sub folders are used)

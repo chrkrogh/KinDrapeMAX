@@ -13,6 +13,7 @@ if strcmpi(Set.InpFileType,'course')
     DraContr_L = Inp.DraContr;
     SteerPts_L = Inp.SteerPts;
     SteerPtsRef = Inp.SteerPtsRef;
+    RootCourseOffset_L{1} = Inp.RootCourseOffset;
     LayerPropagation = 'N/A';
     TrimEdge = 1;
 else
@@ -28,6 +29,7 @@ else
     SteerPts_L = Inp.SteerPts_L;
     SteerPtsRef_L = Inp.SteerPtsRef_L;
     SteerPtsRef = SteerPtsRef_L;
+    RootCourseOffset_L = Inp.RootCourseOffset_L;
 end
 
 % Initialize
@@ -49,6 +51,7 @@ for i = 1:nCourses
     PreShear = PreShear_L{i};
     DraContr = DraContr_L;
     SteerPts = SteerPts_L(:,i)';
+    RootCourseOffset = RootCourseOffset_L{i};
 
     % Make sure that the OrgNode is at the course edge (left or right) for
     % courses # 2:end
@@ -62,7 +65,7 @@ for i = 1:nCourses
 
     % Step 1: Generators (geodesic from unfolded tri or steering curve)
     Dra = Step1(d,Grid,Ang,Org,OrgNode,PreShear,F,DT,z,DraContr,...
-        SteerPts,SteerPtsRef,Mold,Plt,Set);
+        SteerPts,SteerPtsRef,Mold,Plt,Set,RootCourseOffset);
 
     % Step 2: Constrained nodes
     Dra = Step2(Dra,Grid,d,OrgNode,F);

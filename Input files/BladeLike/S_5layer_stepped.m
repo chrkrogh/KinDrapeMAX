@@ -35,16 +35,16 @@ SteerPtsRef = {'Right','Bottom'};
 % Define the steer points using the aux variable Gap
 Gap = 5e-3;
 % Define SteerPts for a course
-SteerPts_c{1,1} = [-0.01 -0.01 -0.01 ; ...
+SteerPts_l{1,1} = [-0.01 -0.01 -0.01 ; ...
                   0  	2     4];
-SteerPts_c{1,2} = [-Gap -Gap -Gap ; 0 2 4]; 
-SteerPts_c{1,3} = [-Gap -Gap -Gap ; 0 2 4];
-SteerPts_c{1,4} = [-Gap -Gap -Gap ; 0 2 4];
+SteerPts_l{1,2} = [-Gap -Gap -Gap ; 0 2 4]; 
+SteerPts_l{1,3} = [-Gap -Gap -Gap ; 0 2 4];
+SteerPts_l{1,4} = [-Gap -Gap -Gap ; 0 2 4];
 
-SteerPts_c(2,1:4) = {[ 0 ; ...
+SteerPts_l(2,1:4) = {[ 0 ; ...
                    5e-3]};
 % Repeat the course steer pt definition for each layer
-SteerPts = {SteerPts_c SteerPts_c SteerPts_c SteerPts_c SteerPts_c};
+SteerPts = {SteerPts_l SteerPts_l SteerPts_l SteerPts_l SteerPts_l};
 
 % Make 100 mm offset from edge per layer
 SteerPts{2}{1}(1,:) = -0.1;

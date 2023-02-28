@@ -146,10 +146,19 @@ for LNo = 1:Inp(1).nLayers
             end
         end
 
+        % Check version to make sure markers are compatible
+        v = version('-release');
+
         % Plot the course at the root
         plot([PrevXCoor NewXCoor],PlotOffset*[LNo LNo],'b-')
-        plot([PrevXCoor NewXCoor],PlotOffset*[LNo LNo],'b|',...
-            'MarkerFaceColor','b','MarkerSize',12)
+        if str2double(v(1:4)) >= 2021
+            % Vertical markers only introduced after 2020
+            plot([PrevXCoor NewXCoor],PlotOffset*[LNo LNo],'b|',...
+                'MarkerFaceColor','b','MarkerSize',12)
+        else
+            plot(([PrevXCoor NewXCoor]'*[1 1])',PlotOffset*[LNo-0.3 LNo+0.3]'*[1 1],'b-')
+        end
+
         % Plot the maximum (abs) overlap value
         if CNo > 1 && MaxOverlap_curr > 0
             plot([PrevXCoor- MinGap_curr PrevXCoor- ...

@@ -19,7 +19,7 @@ The program was used for generating the results of the journal paper:
 [insert reference when published]
 The idea with particularly the optimization framework is well documented in the paper.
 
-The program is executed from the script KinDrapeMAX.m. The program reads the input file and the mold data, analyzes or optimizes the draping pattern (depending on the user settings), plots results in figures, plots results in the command window and lastly asks the user if results should be stored. 
+The program is executed from the script KinDrapeMAX.m. The program reads the input file and the mold data, analyzes or optimizes the draping pattern (depending on the user settings), plots results in figures, plots results in the command window and lastly asks the user if results should be stored. A simpler, more intuitive version that only works with a single course is available through a MATLAB app DrapeApp.mlapp. It can be recommended to start with the app to learn the overall inputs and functionality.
 
 When a mold data file is selected in the beginning of the script (Inp.MoldName, see description of settings below), only the input files pertaining to this mold are available.
 

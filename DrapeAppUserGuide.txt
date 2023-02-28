@@ -1,0 +1,62 @@
+User guide for Kinematic Draping App
+
+This program predicts the draped pattern of a rectangular fabric on various molds of the from z=F(x,y).
+The program was developed specifically for wind turbine blade molds.
+Currently the following molds are implemented, but any point cloud can be 
+processed to a valid mold definition:
+1) Hemisphere: A hemisphere mold as a classical benchmark.
+2) BladeLike: Mold mimicing a blade mold.
+3) Flat: Flat table.
+
+The draping pattern is calculated in two steps:
+1) Determine generators that span the entire ply and populate with nodes.
+2) Calculate the cells spanned by the generators such that their side lengths
+   are equal to the chosen discretization.
+
+The inputs are (which can either be defined in an input file or through the GUI):
+- d: the discretization, i.e. cell side length
+- Grid: the number of nodes in the transverse and longitudinal direction.
+  N.B.: d and Grid control the fabric size.
+- Org: the origin point (only applicable when two goedesic lines are used as generators).
+- OrgNode / OrgNodePct: The origin node, i.e. located at the intersection of the 
+  generators either expressed as the node indices or the percentage of the Grid.
+- Ang: Angle between longitudinal geodesic generator and y-axis (only applicable when
+  two geodesic lines are used as the generators).
+- PreShear: Changing the initial 90 deg. angle between generators at the origin 
+  (only applicable when two geodesics are used or a geodesic is used for the transverse
+  direction). 
+
+- Longitudinal draping control: Choose between a steering curve or a geodesic.
+- Transverse draping control: Choose between a steering curve or a geodesic. 
+
+If the steering curve is selected in any of the above, it must be defined either as 
+"Abs", i.e. in absolute values (in the mold coordinate system) or relative to a 
+mold edge. For the longutidinal steering points, the definition can be relative to:
+- Right edge ("Right" option).
+- Left edge ("Left" option).
+Pairs of (x,y)-coordinates define the offsetting. The y-coordinate defines the
+location on the reference curve (2D Euclidean distance from 1st point on ref. curve)
+and the x-coordinate defines the offset away from the reference curve.
+
+And the transverse steering points can be defined relative to the
+- Bottom edge ("Bottom" option).
+
+As mentioned the Org and Ang are not always applicable as input, e.g. when
+defining the generators as steering curves.
+
+Regarding Ang:
+- If a steering curve is used in the longitudinal direction and a geodesic
+  is used in the transverse direction, the geodesic will be 90 deg. apart from 
+  the steering curve. Use the PreShear to change this.
+- If two steering curves are used as generators they determine the angle.
+
+Regarding Org:
+- If a steering curve is used in the longitudinal direction and a geodesic
+  is used in the transverse direction, the origin is taken as the y-coordinate
+  (2nd component) of Org. The x-coordinate (1st component) is not applicable.
+- If two steering curves are used as generators, the origin is taken as their
+  intersection.
+
+Input limitations:
+- It is not possible to define a geodesic as the longitudinal generator in combination
+  with a steering curve as the transverse generator.

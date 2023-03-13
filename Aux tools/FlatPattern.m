@@ -1,4 +1,4 @@
-function [FlatGrid,Boundary,FigHan] = FlatPattern(Dra_S,LNo,CNo)
+function [FlatGrid,Boundary,FigHan] = FlatPattern(Dra_S,LNo,CNo,OutputName)
 % This function computes (estimates) the flat pattern of a draped course.
 % If the course has been split up in multiple parts due to trimming, only
 % one part is located and converted into a flat pattern.
@@ -94,3 +94,17 @@ hold on
 plot(x_vec,y_vec,'bo')
 plot(Boundary(:,1),Boundary(:,2),'r-')
 axis equal
+
+%% Store output?
+
+if nargin > 3
+    Header = {'x-boundary','y-boundary'};
+
+    ExportCell = [Header ; num2cell(Boundary)];
+
+    writecell(ExportCell,['./Output/' OutputName '_FlatPattern.csv']);
+    
+    print(FigHan,['./Output/' OutputName '_FlatPattern'],'-dpng','-r300')
+
+    fprintf('\n\nSuccessfully saved .csv and figure to output folder\n\n')
+end

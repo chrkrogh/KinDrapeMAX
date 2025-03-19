@@ -14,7 +14,7 @@ surface of the form z = F(x,y), i.e. with a unique z coordinate for every coordi
 The program is compatible with MATLAB version R2019b through R2022a. It will likely be compatible with future releases as well.
 Please see the [user guide](/KinDrapeMAX_user_guide.md) for more information on how to run it.
 
-The program was used to generate the results described in the journal paper Krogh, C., Hermansen, S. M., Lund, E., Kepler, J., & Jakobsen, J. (2023). A matter of course: Generating optimal manufacturing instructions from a structural layup plan of a wind turbine blade. Composites Part A: Applied Science and Manufacturing, 172, 107599. Link: https://doi.org/10.1016/j.compositesa.2023.107599
+The program was used to generate the results described in the journal paper: Krogh, C., Hermansen, S. M., Lund, E., Kepler, J., & Jakobsen, J. (2023). A matter of course: Generating optimal manufacturing instructions from a structural layup plan of a wind turbine blade. Composites Part A: Applied Science and Manufacturing, 172, 107599. Link: https://doi.org/10.1016/j.compositesa.2023.107599
 
 Below is an example of output generated with the program: five courses of fabric draped in a mold and colored based on shear angle.
 ![This is an image](/Output/2022-December-19_14-52_1layer_baseline/ShearFig.png)
